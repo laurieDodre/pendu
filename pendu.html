@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pojet passerelle #1 : Jeu du pendu</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div id="grid">
+            <div id="result">
+                <!-- Contiendra le résultat -->
+                _ _ _ _ _ _ _ _ _
+            </div>
+            <div id="imgPendu">
+                <!-- Contiendra l'image du pendu' -->
+                <img src="images/pendu.png" alt="">
+            </div>
+        </div>
+
+        <div id="alphabetLetter">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>A</td>
+                        <td>Z</td>
+                        <td>E</td>
+                        <td>R</td>
+                        <td>T</td>
+                        <td>Y</td>
+                        <td>U</td>
+                        <td>I</td>
+                        <td>O</td>
+                        <td>P</td>
+                    </tr>
+                    <tr>
+                        <td>Q</td>
+                        <td>S</td>
+                        <td>D</td>
+                        <td>F</td>
+                        <td>G</td>
+                        <td>H</td>
+                        <td>J</td>
+                        <td>K</td>
+                        <td>L</td>
+                        <td>M</td>
+                    </tr>
+                    <tr>
+                        <td>W</td>
+                        <td>X</td>
+                        <td>C</td>
+                        <td>V</td>
+                        <td>B</td>
+                        <td>N</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="form">
+            <form id="propositionWord">
+                <p>
+                    <label for="secretWord">Proposer un mot : </label>
+                    <input type="text" name="prenom" id="prenom">
+                </p>
+                <button type="submit">Résultat</button>
+            </form>        
+            <a href="index.html"><button>Page accueil</button></a>
+        </div>
+
+
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

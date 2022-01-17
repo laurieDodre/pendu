@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 300px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #094074;
+    color: white;
+}
+
+.container {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px;
+    color: #FFDD4A;
+}
+
+h1 span {
+    text-transform: uppercase;
+    font-size: 3em;
+}
+
+#ruleOfTheGame {
+    text-align: center;
+    font-size: 1.5em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#ruleOfTheGame p:first-of-type {
+    text-decoration: underline dotted;
+}
+
+#ruleOfTheGame p:nth-of-type(2) {
+    margin: 50px;
+}
+
+#ruleOfTheGame p:nth-of-type(3) {
+    font-size: 2em;
+    color: #FFDD4A;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    margin: 15px;
+    align-items: center;
+    text-align: center;
+}
+
+#imgPendu img {
+    min-width: 80%;
+    min-height: 80%;
+}
+
+#result {
+    font-size: 3em;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 5px;
+}
+
+table td {
+    border: 1px solid white;
+    width: 75px;
+    height: 75px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#form {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#form label {
+    font-size: 1.2em;
+}
+
+#form input {
+    height: 30px;
+}
+
+button {
+    background: #FFDD4A;
+    border-radius: 10px;
+    color: #094074;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    width: 150px;
+}
+
+button:hover {
+    background: #4E4C67;
+    color: #FFDD4A;
+}
