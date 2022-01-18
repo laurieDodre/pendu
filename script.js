@@ -1,9 +1,14 @@
-//Séléctionner les éléments qui seront utiles (boutons, div qui contiendra le résultat, input de proposition de mots ...)
-// Faire une fonction random qui parcourera le tableau 'secretWord' pour choisir un mot à demasqué au hasard
-//Faire une fonction qui vérifiera le mot proposé dans l'input s'il correspond au mot secret
-//Si les erreurs sont commises alors la partie est terminée, le mot secret s'affiche et le bouton rejouer apparait.
+let btn = document.querySelector('#btnResult'); // bouton de validation du mot proposé
+let revealSecretWord = document.querySelector('#result'); // affichage en temps réel du mot secret à deviner
+let imgPendu = document.querySelector('#imgPendu'); // image du pendu selon les erreurs
+let proposedWord = document.querySelector('input'); // input qui contient la proposition de mot
+let alphabetLetters = document.querySelector('#alphabetLetter');
 
-let secretWord = [ //Mon tableau de mots secrets
+function generatorSecretWord(word) { // fonction  pour générer un mot aléatoire
+    return Math.floor(Math.random() * Math.floor(word));
+}
+
+let secretWord = [
     'chocolat',
     'maison',
     'believemy',
@@ -24,3 +29,28 @@ let secretWord = [ //Mon tableau de mots secrets
     'fleuriste',
     'pharmacie'
 ]
+
+let tableau = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+function virtualKeyboard() {
+    let table = document.createElement('table');
+    table.className = 'table';
+    let tbody = document.createElement('tbody');
+    let tr = document.createElement('tr');
+
+    for (const letters of tableau) {
+        let td = document.createElement('td');
+        td.className = 'tableTd';
+        td.innerText = letters;
+        tr.appendChild(td);
+        td.addEventListener('click', () => {
+            console.log(td.innerText);
+        })
+    }
+
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+    alphabetLetters.appendChild(table);
+}
+
+virtualKeyboard();
