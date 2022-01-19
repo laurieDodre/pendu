@@ -4,15 +4,12 @@ let imgPendu = document.querySelector('#imgPendu'); // image du pendu selon les 
 let proposedWord = document.querySelector('input'); // input qui contient la proposition de mot
 let alphabetLetters = document.querySelector('#alphabetLetter');
 
-function generatorSecretWord(word) { // fonction  pour générer un mot aléatoire
-    return Math.floor(Math.random() * Math.floor(word));
-}
-
+let numberOfStrokes = 0;
 let secretWord = [
     'chocolat',
     'maison',
     'believemy',
-    'opportunité',
+    'opportunite',
     'odeur',
     'gymnaste',
     'horizon',
@@ -45,12 +42,42 @@ function virtualKeyboard() {
         tr.appendChild(td);
         td.addEventListener('click', () => {
             console.log(td.innerText);
+            //je dois comparer la valeur de mon 'td' au mot secret de ma fonction
+            //si les lettres que mon utilisateur "click" est/sont présentes (une ou plusieurs)
+            //alors je dois les afficher au bon emplacement
+            //sinon si elles ne s'y trouvent pas
+            //nombreDeCoups++
+            //changer 'imgPendu'
         })
     }
-
     tbody.appendChild(tr);
     table.appendChild(tbody);
     alphabetLetters.appendChild(table);
 }
-
 virtualKeyboard();
+
+function retrieveLettersSecretWord(randomWord) {
+    randomWord = secretWord[Math.floor(Math.random() * secretWord.length)];
+    let lettersRandomWord = randomWord.toUpperCase().split('');
+    let table = document.createElement('table');        
+     table.className = 'table';
+    let tbody = document.createElement('tbody');
+    let tr = document.createElement('tr');
+    for (i = 0; i < lettersRandomWord.length; i++) {
+        let td = document.createElement('td');
+        td.className = 'tableSecretWord';
+        tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+    revealSecretWord.appendChild(table);
+    return lettersRandomWord;
+}
+console.log(retrieveLettersSecretWord(secretWord));
+
+// function retrieveSecretWord() {
+//     if(proposedWord.value == secretWord.value) {
+//         retrieveLettersSecretWord();
+//     }
+// }
+// console.log(retrieveSecretWord(secretWord));
