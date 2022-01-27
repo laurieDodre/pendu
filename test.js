@@ -100,3 +100,14 @@ console.log(motAleatoireGenerer);
 //     checkGame(letter);
 // }
 
+// function recupererLettresClavier() {
+// fonction avec un évènement au clic qui récupérera la lettre 
+//     SI lettreClavierPrésente ALORS
+//     AFFICHER la lettre aux emplacements correspondant au motSecret en vert
+//     SINON
+//     AFFICHER nombreDeCoups restants
+//     Mettre les lettres erronées en rouge
+//     CHANGER l’ image du PENDU
+//     finDePartie();
+// }
+// }

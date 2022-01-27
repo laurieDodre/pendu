@@ -35,22 +35,42 @@ let tableauMotsSecret = [
 ]
 let tableauLettres = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
+// function debutPartie() {
+
 function genererClavierVirtuel() {
-    let table = document.createElement('table');
-    table.className = 'table';
-    let tbody = document.createElement('tbody');
-    let tr = document.createElement('tr');
     for (const lettres of tableauLettres) {
-        let td = document.createElement('td');
-        td.className = 'tableTd';
-        td.innerText = lettres;
-        tr.appendChild(td);
+        let lettre = document.createElement('div');
+        lettre.className = 'tableAlphabet';
+        lettre.innerText = lettres;
+        lettresClavierVirtuel.appendChild(lettre);
     }
-    tbody.appendChild(tr);
-    table.appendChild(tbody);
-    lettresClavierVirtuel.appendChild(table);
 }
 genererClavierVirtuel();
+
+function recupererLettreAuClic() {
+    for (const lettres of tableauLettres) {
+        let lettrePush = lettres;
+        lettrePush.addEventListener('click', () => {
+            console.log(`Je suis la lettre ${lettrePush}`);
+        })
+    }
+}
+recupererLettreAuClic();
+
+function recupererMotSecret() {
+    motAleatoire = tableauMotsSecret[Math.floor(Math.random() * tableauMotsSecret.length)];
+    for (i = 0; i < motAleatoire.length; i++) {
+        let div = document.createElement('div');
+        div.className = 'tableSecretWord';
+        motAReveler.appendChild(div);
+    }
+    return motAleatoire;
+}
+let motAleatoireGenerer = recupererMotSecret(tableauMotsSecret);
+console.log(motAleatoireGenerer);
+
+
+
 
 function finDePartie() {
     if (nombreDeCoups >= 11) {
@@ -61,16 +81,3 @@ function finDePartie() {
     }
 }
 finDePartie();
-
-function recupererMotSecret() {
-    motAleatoire = tableauMotsSecret[Math.floor(Math.random() * tableauMotsSecret.length)];
-    lettresMotAleatoire = motAleatoire.toUpperCase().split('');
-    for (i = 0; i < lettresMotAleatoire.length; i++) {
-        let div = document.createElement('div');
-        div.className = 'tableSecretWord';
-        motAReveler.appendChild(div);
-    }
-    return lettresMotAleatoire;
-}
-let motAleatoireGenerer = recupererMotSecret(tableauMotsSecret);
-console.log(motAleatoireGenerer);
