@@ -70,6 +70,14 @@ h1 span {
     min-height: 80%;
 }
 
+#message {
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFDD4A;
+    font-size: 1.5em;
+    margin: 15px;
+}
+
 .table {
     margin-left: auto;
     margin-right: auto;
@@ -113,9 +121,10 @@ button:hover {
 }
 
 .tableSecretWord {
+    display: inline-block;
     border: 1px solid white;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height:60px;
     font-size: 20px;
     text-align: center;
 }
