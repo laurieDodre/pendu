@@ -6,14 +6,13 @@ let lettresClavier = document.querySelector('#alphabetLetter'); //contient le cl
 let message = document.querySelector('#message'); //contient le message d'erreur ou de succes
 
 let motAleatoire;
-let lettresMotAleatoire;
-let lettre;
-let lettreExacte;
-let div;
-
+let motDuJoueur = "";
+let nombreDeLettreRestanteATrouver = 0;
+let casesLettreATrouver = null;
 let nombreDeCoups = 0;
+let maxCoups = 11;
 
-let images = [
+let imagePenduParCoup = [
     'pendu1', 'pendu2', 'pendu3', 'pendu4', 'pendu5', 'pendu7', 'pendu8', 'pendu9', 'pendu10', 'pendu11'
 ]
 
@@ -43,45 +42,92 @@ let tableauMotsSecret = [
 ]
 let tableauLettres = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-// function debutPartie() {
-
-function verificationLettresClavierVirtuel() {
-    for (const lettres of tableauLettres) {
-        lettre = document.createElement('div');
-        lettre.className = 'tableAlphabet';
-        lettre.innerHTML = lettres;
-        lettresClavier.appendChild(lettre);
-        lettre.addEventListener('click', () => {
-            console.log(lettres);
-            if (motAleatoire.includes(lettres)) {
-                console.log('ok');
-                lettreExacte = [];
-                lettreExacte.push(lettres);
-                div.innerText = lettreExacte;
-            }
+function creationEtVerificationLettresClavierVirtuel() {
+    for (const lettre of tableauLettres) {
+        const caseLettre = document.createElement('div');
+        caseLettre.className = 'tableAlphabet';
+        caseLettre.textContent = lettre;
+        lettresClavier.appendChild(caseLettre);
+        caseLettre.addEventListener('click', () => {
+            const lettreCase = caseLettre.textContent;
+            console.log(caseLettre);
+            verificationLettre(lettreCase);
         })
     }
 }
-verificationLettresClavierVirtuel();
+creationEtVerificationLettresClavierVirtuel();
 
 function recupererMotSecret() {
     motAleatoire = tableauMotsSecret[Math.floor(Math.random() * tableauMotsSecret.length)];
     motAleatoire = motAleatoire.toUpperCase();
-    for (i = 0; i < motAleatoire.length; i++) {
-        div = document.createElement('div');
-        div.className = 'tableSecretWord';
-        motAReveler.appendChild(div);
-    }
+    let longueurDuMotAleatoire = motAleatoire.length;
+    motDuJoueur = ''.repeat(longueurDuMotAleatoire);
+    nombreDeLettreRestanteATrouver = longueurDuMotAleatoire;
     return motAleatoire;
 }
 console.log(recupererMotSecret(tableauMotsSecret));
+// recupererMotSecret(tableauMotsSecret);
 
-function finDePartie() {
-    if (nombreDeCoups >= 11) {
-        imgPendu.src = "images/pendu11.png";
-        message.innerText = `Oh non! Vous avez perdu. Le mot à trouvé était : ${motAleatoire}`
-        // Mettre fin à la partie
-        // Proposez une nouvelle partie
+function afficherCaseVide() {
+    const div = document.createElement('div');
+    div.className = 'tableSecretWord';
+    motAReveler.appendChild(div);
+}
+
+function afficherCasesLettresATrouver(motAleatoire) {
+    for (i = 0; i < motAleatoire.length; i++) {
+        afficherCaseVide();
+    }
+    casesLettreATrouver = document.querySelectorAll('.tableSecretWord');
+}
+
+function afficherLettreCorrecte(lettre, position) {
+    casesLettreATrouver[position].textContent = lettre;
+}
+
+function remplaceLettre(str, index, nouvelleLettre) {
+    return str.substring(0, index) + nouvelleLettre + str.substring(index + nouvelleLettre.lenght);
+}
+
+//Revoir cette fonction car elle ne fonctionne pas comme je le souhaite
+function afficherPartiePendu(coups) {
+    if (coups >= 11) {
+        message.innerText = `Fin de la partie. Le mot à trouvé était : ${motAleatoire} !`;
+    } else {
+        let coupRestant = maxCoups - coups;
+        message.innerText = `Vous avez effectuée ${coups} coups, il ne vous reste plus que ${coupRestant} coups pour trouver le bon mot.`;
+        for (i = 0; i < imagePenduParCoup.length; i++) {
+            imagePenduParCoup = `images/pendu${i}.png`;        
+            imgPendu.src = imagePenduParCoup;
+        }
     }
 }
-finDePartie();
+
+function afficherPartieGagnee() {
+    message.innerText = ` Vous avez gagnée. Le mot à trouvé est bien ${motAleatoire} !`;
+}
+
+function verificationLettre(lettre) {
+    let ok = false;
+    for (let i = 0; i < motAleatoire.length; i++) {
+        let c = motAleatoire.charAt(i);
+        if ((lettre == c) && (motDuJoueur.charAt(i) == '')) {
+            ok = true;
+            afficherLettreCorrecte(lettre, i);
+            motDuJoueur == replaceCharAt(motDuJoueur, i, lettre);
+        }
+    }
+    if ((ok && (nombreDeLettreRestanteATrouver == 0))) {
+        afficherPartieGagnee();
+    } else {
+        afficherPartiePendu(nombreDeCoups);
+        nombreDeCoups++;
+        console.log(nombreDeCoups);
+    }
+}
+
+
+
+
+
+
