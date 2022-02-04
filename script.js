@@ -1,6 +1,6 @@
 let bouton = document.querySelector('#btnResult'); // bouton de validation du mot proposé
 let motAReveler = document.querySelector('#result'); // contient le mot secret à deviner
-let imgPendu = document.querySelector('#imgPendu'); // image du pendu selon les erreurs
+let imagePendu = document.querySelector('#imgPendu'); // image du pendu selon les erreurs
 let motPropose = document.querySelector('input'); // input qui contient la proposition de mot
 let lettresClavier = document.querySelector('#alphabetLetter'); //contient le clavier virtuel
 let message = document.querySelector('#message'); //contient le message d'erreur ou de succes
@@ -53,7 +53,7 @@ function creationEtVerificationLettresClavierVirtuel() {
             console.log(caseLettre);
             verificationLettre(lettreCase);
         })
-    }
+    }            
 }
 creationEtVerificationLettresClavierVirtuel();
 
@@ -80,6 +80,7 @@ function afficherCasesLettresATrouver(motAleatoire) {
     }
     casesLettreATrouver = document.querySelectorAll('.tableSecretWord');
 }
+afficherCasesLettresATrouver(motAleatoire);
 
 function afficherLettreCorrecte(lettre, position) {
     casesLettreATrouver[position].textContent = lettre;
@@ -91,15 +92,14 @@ function remplaceLettre(str, index, nouvelleLettre) {
 
 //Revoir cette fonction car elle ne fonctionne pas comme je le souhaite
 function afficherPartiePendu(coups) {
-    if (coups >= 11) {
+    if (coups >= maxCoups) {
         message.innerText = `Fin de la partie. Le mot à trouvé était : ${motAleatoire} !`;
+        imgPendu.src = `images/pendu11.png`;
     } else {
         let coupRestant = maxCoups - coups;
         message.innerText = `Vous avez effectuée ${coups} coups, il ne vous reste plus que ${coupRestant} coups pour trouver le bon mot.`;
-        for (i = 0; i < imagePenduParCoup.length; i++) {
-            imagePenduParCoup = `images/pendu${i}.png`;        
-            imgPendu.src = imagePenduParCoup;
-        }
+        nomImagePendu = `images/${imagePenduParCoup[coups - 1]}.png`;        
+        imgPendu.src = nomImagePendu;
     }
 }
 
@@ -114,7 +114,7 @@ function verificationLettre(lettre) {
         if ((lettre == c) && (motDuJoueur.charAt(i) == '')) {
             ok = true;
             afficherLettreCorrecte(lettre, i);
-            motDuJoueur == replaceCharAt(motDuJoueur, i, lettre);
+            motDuJoueur == remplaceLettre(motDuJoueur, i, lettre);
         }
     }
     if ((ok && (nombreDeLettreRestanteATrouver == 0))) {
@@ -125,6 +125,7 @@ function verificationLettre(lettre) {
         console.log(nombreDeCoups);
     }
 }
+
 
 
 
